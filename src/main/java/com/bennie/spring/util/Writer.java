@@ -31,9 +31,25 @@ public class Writer {
 		outputStream.close();
 	}
 
-	public static void write(HttpServletResponse response, byte[] body) {
-		// TODO Auto-generated method stub
+	/**
+	 * Writes the report to the output stream
+	 */
+	public static void write(HttpServletResponse response, byte[] byteArray) {
 
+		logger.debug("Writing report to the stream");
+		try {
+			// Retrieve the output stream
+			ServletOutputStream outputStream = response.getOutputStream();
+			// Write to the output stream
+			outputStream.write(byteArray);
+			// Flush the stream
+			outputStream.flush();
+			// Close the stream
+			outputStream.close();
+
+		} catch (Exception e) {
+			logger.error("Unable to write report to the output stream");
+		}
 	}
 
 }

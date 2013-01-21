@@ -12,5 +12,8 @@
 
 Request has been sent!
 
+<c:url var="viewallUrl" value="/admin/getall" />
+<a href="${viewallUrl}">view all</a>
+
 </body>
 </html>

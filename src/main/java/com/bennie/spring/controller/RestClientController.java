@@ -27,10 +27,33 @@ import com.bennie.spring.util.Writer;
 /**
  * REST Service Client
  */
+
+/*
+ * @RequestMapping(value = "/getphoto", method = RequestMethod.GET) , id
+ * 
+ * @RequestMapping(value = "/getall", method = RequestMethod.GET)
+ * 
+ * @RequestMapping(value = "/get", method = RequestMethod.GET)
+ * 
+ * @RequestMapping(value = "/add", method = RequestMethod.GET)
+ * 
+ * @RequestMapping(value = "/add", method = RequestMethod.POST)
+ * 
+ * @RequestMapping(value = "/update", method = RequestMethod.GET)
+ * 
+ * @RequestMapping(value = "/update", method = RequestMethod.POST)
+ * 
+ * @RequestMapping(value = "/delete", method = RequestMethod.GET)
+ */
+
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/admin")
 public class RestClientController {
 
+	private static final MediaType REST_REQUEST_TYPE = MediaType.APPLICATION_JSON;
+	// private static final MediaType REST_REQUEST_TYPE =
+	// MediaType.APPLICATION_XML;
+	// define REST Service URI
 	private static final String REST_URI_GETPHOTO = "http://localhost:8080/spring/rest/person/{id}";
 	private static final String REST_URI_GET_PERSON = "http://localhost:8080/spring/rest/person/{id}";
 	private static final String REST_URI_GET_ALL_PERSON = "http://localhost:8080/spring/rest/persons";
@@ -62,11 +85,11 @@ public class RestClientController {
 	@RequestMapping(value = "/getall", method = RequestMethod.GET)
 	public ModelAndView getAllPerson() {
 		HttpEntity<Person> entity = new HttpEntity<Person>(
-				buildRequestHeader(MediaType.APPLICATION_XML));
+				buildRequestHeader(REST_REQUEST_TYPE));
 		ResponseEntity<PersonList> result = this.restTemplate.exchange(
 				REST_URI_GET_ALL_PERSON, HttpMethod.GET, entity,
 				PersonList.class);
-		ModelAndView mav = new ModelAndView("personpage");
+		ModelAndView mav = new ModelAndView("personspage");
 		mav.addObject("persons", result.getBody().getPerson());
 		return mav;
 	}
@@ -75,7 +98,7 @@ public class RestClientController {
 	public ModelAndView getPerson(@RequestParam("id") Long id) {
 		logger.info("display person info");
 		HttpEntity<Person> entity = new HttpEntity<Person>(
-				buildRequestHeader(MediaType.APPLICATION_XML));
+				buildRequestHeader(REST_REQUEST_TYPE));
 		ResponseEntity<Person> result = this.restTemplate.exchange(
 				REST_URI_GET_PERSON, HttpMethod.GET, entity, Person.class, id);
 		ModelAndView mav = new ModelAndView("getpage");
@@ -97,7 +120,7 @@ public class RestClientController {
 		logger.info("Add person action");
 
 		HttpEntity<Person> entity = new HttpEntity<Person>(person,
-				buildRequestHeader(MediaType.APPLICATION_XML));
+				buildRequestHeader(REST_REQUEST_TYPE));
 		ResponseEntity<Person> result = this.restTemplate.exchange(
 				REST_URI_ADD_PERSON, HttpMethod.POST, entity, Person.class);
 		ModelAndView mav = new ModelAndView("resultpage");
@@ -111,7 +134,7 @@ public class RestClientController {
 			@RequestParam(value = "id", required = true) Integer id) {
 		logger.info("Update Person page display");
 		HttpEntity<Person> entity = new HttpEntity<Person>(
-				buildRequestHeader(MediaType.APPLICATION_XML));
+				buildRequestHeader(REST_REQUEST_TYPE));
 		ResponseEntity<Person> result = this.restTemplate.exchange(
 				REST_URI_GET_PERSON, HttpMethod.GET, entity, Person.class, id);
 		ModelAndView mav = new ModelAndView("updatepage");
@@ -125,9 +148,9 @@ public class RestClientController {
 			@RequestParam(value = "id", required = true) Long id) {
 		logger.info("Update Person Action");
 		HttpEntity<Person> entity = new HttpEntity<Person>(person,
-				buildRequestHeader(MediaType.APPLICATION_XML));
+				buildRequestHeader(REST_REQUEST_TYPE));
 		ResponseEntity<String> result = this.restTemplate.exchange(
-				REST_URI_UPDATE_PERSON, HttpMethod.GET, entity, String.class,
+				REST_URI_UPDATE_PERSON, HttpMethod.PUT, entity, String.class,
 				id);
 		ModelAndView mav = new ModelAndView("resultpage");
 		mav.addObject("reuslt", result);
@@ -139,7 +162,7 @@ public class RestClientController {
 		logger.info("delete existing person");
 
 		HttpEntity<String> entity = new HttpEntity<String>(
-				buildRequestHeader(MediaType.APPLICATION_XML));
+				buildRequestHeader(REST_REQUEST_TYPE));
 
 		ResponseEntity<String> result = restTemplate.exchange(
 				REST_URI_DELETE_PERSON, HttpMethod.DELETE, entity,
