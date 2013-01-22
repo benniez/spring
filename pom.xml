@@ -176,7 +176,7 @@
             <artifactId>tomcat-maven-plugin</artifactId>
 		<configuration>
                      <server>myserver</server>
-			<url>http://localhost:8080/manager/text</url>
+			<url>http://54.235.221.189:8080/manager/text</url>
              </configuration>
              </plugin>
         </plugins>
