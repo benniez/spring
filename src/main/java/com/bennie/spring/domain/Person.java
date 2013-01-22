@@ -1,13 +1,33 @@
 package com.bennie.spring.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+@Entity
+@Table(name = "PERSON")
 @XmlRootElement(name = "person")
-public class Person {
+public class Person implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2312930848375712554L;
+	@Id
+	@Column(name = "ID")
+	@GeneratedValue
 	private Long id;
+
+	@Column(name = "FIRST_NAME")
 	private String firstName;
+	@Column(name = "LAST_NAME")
 	private String lastName;
+	@Column(name = "MONEY")
 	private Double money;
 
 	public String getFirstName() {
