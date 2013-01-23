@@ -33,7 +33,7 @@ public class PersonServiceHibernateImpl implements PersonService {
 	}
 
 	@Override
-	public Person get(Long id) {
+	public Person get(Integer id) {
 		logger.debug("Retrieving person");
 		Session session = sessionFactory.getCurrentSession();
 		Person person = (Person) session.get(Person.class, id);
@@ -45,12 +45,12 @@ public class PersonServiceHibernateImpl implements PersonService {
 	public Person add(Person person) {
 		logger.debug("Add person");
 		Session session = sessionFactory.getCurrentSession();
-		Person person1 = (Person) session.save(person);
-		return person1;
+		Integer newId = (Integer) session.save(person);
+		return get(newId);
 	}
 
 	@Override
-	public Boolean delete(Long id) {
+	public Boolean delete(Integer id) {
 		logger.debug("Deleting existing person");
 		Session session = sessionFactory.getCurrentSession();
 		Person person = (Person) session.get(Person.class, id);

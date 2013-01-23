@@ -1,0 +1,3 @@
+INSERT spring.PERSON (FIRST_NAME,LAST_NAME,MONEY) values ('A' , 'A' , 100.2);
+INSERT spring.PERSON (FIRST_NAME,LAST_NAME,MONEY) values ('B' , 'B' , 200.2);
+INSERT spring.PERSON (FIRST_NAME,LAST_NAME,MONEY) values ('C' , 'C' , 300.2);

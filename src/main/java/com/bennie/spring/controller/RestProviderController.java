@@ -48,7 +48,7 @@ public class RestProviderController {
 	// "Accept=application/xml" or "Accept=application/json"
 	@RequestMapping(value = "/person/{id}", method = RequestMethod.GET, headers = "Accept=application/xml, application/json")
 	public @ResponseBody
-	Person getPerson(@PathVariable("id") Long id, Model model) {
+	Person getPerson(@PathVariable("id") Integer id, Model model) {
 		logger.debug("Provider has received request to get person with id: "
 				+ id);
 		model.addAttribute("person", personService.get(id));
@@ -56,6 +56,7 @@ public class RestProviderController {
 
 	}
 
+	// GET ALL PERSON
 	@RequestMapping(value = "/persons", method = RequestMethod.GET, headers = "Accept=application/xml, application/json")
 	public ResponseEntity<PersonList> getPersons() {
 
@@ -75,7 +76,7 @@ public class RestProviderController {
 	// UPDATE PERSON
 	@RequestMapping(value = "/person/{id}", method = RequestMethod.PUT, headers = "Accept=application/xml, application/json")
 	public ResponseEntity<String> updatePerson(@RequestBody Person person,
-			@PathVariable("id") Long id) {
+			@PathVariable("id") Integer id) {
 		person.setId(id);
 		return new ResponseEntity<String>(this.personService.edit(person)
 				.toString(), HttpStatus.OK);
@@ -83,7 +84,7 @@ public class RestProviderController {
 
 	// Delete PERSON
 	@RequestMapping(value = "/person/{id}", method = RequestMethod.DELETE, headers = "Accept=application/xml, application/json")
-	public ResponseEntity<String> deletePerson(@PathVariable("id") Long id) {
+	public ResponseEntity<String> deletePerson(@PathVariable("id") Integer id) {
 		return new ResponseEntity<String>(this.personService.delete(id)
 				.toString(), HttpStatus.OK);
 	}

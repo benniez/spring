@@ -6,11 +6,11 @@ import com.bennie.spring.domain.Person;
 
 public interface PersonService {
 
-	Person get(Long id);
+	Person get(Integer id);
 
 	Person add(Person person);
 
-	Boolean delete(Long id);
+	Boolean delete(Integer id);
 
 	Boolean edit(Person person);
 

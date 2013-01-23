@@ -14,6 +14,7 @@
 <table style="border: 1px solid; width: 500px; text-align:center">
 	<thead style="background:#fcf">
 		<tr>
+			<th>UID</th>
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Money</th>
@@ -26,6 +27,7 @@
 			<c:url var="deleteUrl" value="/admin/delete?id=${person.id}" />
 			<c:url var="getUrl" value="/admin/get?id=${person.id}" />
 		<tr>
+			<td><c:out value="${person.id}" /></td>
 			<td><c:out value="${person.firstName}" /></td>
 			<td><c:out value="${person.lastName}" /></td>
 			<td><c:out value="${person.money}" /></td>
