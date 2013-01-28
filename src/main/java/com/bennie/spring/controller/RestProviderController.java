@@ -27,6 +27,8 @@ import com.bennie.spring.service.PersonService;
 @Controller
 @RequestMapping("/rest")
 public class RestProviderController {
+	private static final String ACCEPT_TYPE = "Accept=application/xml,application/json";
+
 	private static final Logger logger = LoggerFactory
 			.getLogger(RestProviderController.class);
 
@@ -46,7 +48,7 @@ public class RestProviderController {
 	}
 
 	// "Accept=application/xml" or "Accept=application/json"
-	@RequestMapping(value = "/person/{id}", method = RequestMethod.GET, headers = "Accept=application/xml, application/json")
+	@RequestMapping(value = "/person/{id}", method = RequestMethod.GET, headers = ACCEPT_TYPE)
 	public @ResponseBody
 	Person getPerson(@PathVariable("id") Integer id, Model model) {
 		logger.debug("Provider has received request to get person with id: "
@@ -57,7 +59,7 @@ public class RestProviderController {
 	}
 
 	// GET ALL PERSON
-	@RequestMapping(value = "/persons", method = RequestMethod.GET, headers = "Accept=application/xml, application/json")
+	@RequestMapping(value = "/persons", method = RequestMethod.GET, headers = ACCEPT_TYPE)
 	public ResponseEntity<PersonList> getPersons() {
 
 		PersonList pl = new PersonList();
@@ -66,7 +68,7 @@ public class RestProviderController {
 	}
 
 	// ADD PERSON
-	@RequestMapping(value = "/person", method = RequestMethod.POST, headers = "Accept=application/xml, application/json")
+	@RequestMapping(value = "/person", method = RequestMethod.POST, headers = ACCEPT_TYPE)
 	public ResponseEntity<Person> addPerson(@RequestBody Person person) {
 		logger.info("start adding person:" + person.toString());
 		return new ResponseEntity<Person>(this.personService.add(person),
@@ -74,7 +76,7 @@ public class RestProviderController {
 	}
 
 	// UPDATE PERSON
-	@RequestMapping(value = "/person/{id}", method = RequestMethod.PUT, headers = "Accept=application/xml, application/json")
+	@RequestMapping(value = "/person/{id}", method = RequestMethod.PUT, headers = ACCEPT_TYPE)
 	public ResponseEntity<String> updatePerson(@RequestBody Person person,
 			@PathVariable("id") Integer id) {
 		person.setId(id);
@@ -83,7 +85,7 @@ public class RestProviderController {
 	}
 
 	// Delete PERSON
-	@RequestMapping(value = "/person/{id}", method = RequestMethod.DELETE, headers = "Accept=application/xml, application/json")
+	@RequestMapping(value = "/person/{id}", method = RequestMethod.DELETE, headers = ACCEPT_TYPE)
 	public ResponseEntity<String> deletePerson(@PathVariable("id") Integer id) {
 		return new ResponseEntity<String>(this.personService.delete(id)
 				.toString(), HttpStatus.OK);

@@ -42,4 +42,19 @@ public class HomeController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index() {
+		return "redirect:/pages/index.html";
+	}
+
+	// for spring security example
+	@RequestMapping(value = "/common", method = RequestMethod.GET)
+	public String getCommonPage() {
+		return "commonpage";
+	}
+
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String getAdminPage() {
+		return "adminpage";
+	}
 }

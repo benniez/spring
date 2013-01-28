@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Cordova</title>
+<script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function(){
+		$("#getPersonBtn").click(getPersonList);
+		});
+	function onDeviceReady(){
+		console.log("Entering index.html.onDeviceReady");
+		getPersonList();
+		console.log("Exiting index.html.onDeviceReady");
+	}
+
+	function getPersonList(){
+		console.log("Entering getPersonList()");
+		$.ajax({"url": "http://54.235.221.189:8080/spring/rest/persons",
+				dataType: "json",
+				contentType: "application/json",
+            	type: "GET",
+				cache:false,
+				error:function (xhr,ajaxOptions,thrownError){
+					debugger;
+						alert(xhr.statusText);
+						alert(throwError);
+				},
+				success: function(data){
+					console.log("Entering getPersonList.success()");
+					 $.each(data.person, function(i,person){
+						 	content ='<tr>';
+				            content += '<td>' + person.firstName + '</td>';
+				            content += '<td>' + person.lastName + '</td>';
+				            content += '<td>' + person.money + '</td>';
+				            content += '<tr/>';
+				            $(content).appendTo("#personList");
+				          });
+					console.log("Exiting getPersonList.success()");
+				}
+		});
+		console.log("Exiting getPersonList()");
+	}
+	
+
+	</script>
+
+
+
+</head>
+<body>
+<h1>REST in Android</h1>
+<h3>Person List</h3>
+  <button id="getPersonBtn">Get Person</button>
+  <ul id="personList"></ul>
+</body>
+</html>
