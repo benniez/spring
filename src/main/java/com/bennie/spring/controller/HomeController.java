@@ -47,6 +47,11 @@ public class HomeController {
 		return "redirect:/pages/index.html";
 	}
 
+	@RequestMapping(value = "/valentine2013", method = RequestMethod.GET)
+	public String valentine() {
+		return "redirect:/pages/valentine2013.html";
+	}
+
 	// for spring security example
 	@RequestMapping(value = "/common", method = RequestMethod.GET)
 	public String getCommonPage() {
